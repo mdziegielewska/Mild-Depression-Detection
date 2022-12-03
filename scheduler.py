@@ -66,7 +66,7 @@ class Scheduler:
                 score_healthy += score_healthy_local
                 proccessed_count += 1
                 #print(f'score_sick: {score_sick}, score_healthy: {score_healthy} ')
-                print(f'{((proccessed_count)*100/72):.2f}% processed')
+                print(f'{((proccessed_count)*100/71):.2f}% processed')
 
 
     def run(self):
