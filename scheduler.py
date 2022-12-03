@@ -77,7 +77,7 @@ class Scheduler:
         score_sick/=51
         score_healthy/=21
         predict = score_sick/(score_sick + score_healthy)
-        print(f"{predict*100}% of score is \"ill\" score. Subject propably do{' ' if predict<=0.5 else ' not '}have mild depression!")
+        print(f"{predict*100}% of score is \"healthy\" score. Subject propably do{' ' if predict<=0.5 else ' not '}have mild depression!")
                 # draw_params = dict(matchColor = (0,255,0),
                 #     singlePointColor = (255,0,0),
                 #     #matchesMask = matchesMask,
