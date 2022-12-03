@@ -94,8 +94,8 @@ class Scheduler:
         global score_sick, score_healthy
         print(score_sick)
         print(score_healthy)
-        score_sick/=51
-        score_healthy/=21
+        score_sick/= (51 if int(index) >= 51 else 50)
+        score_healthy/= (20 if int(index) >= 51 else 21)
         predict = score_sick/(score_sick + score_healthy)
         print(f"{predict*100}% of score is \"healthy\" score. Subject propably do{' ' if predict<=0.5 else ' not '}have mild depression!")
                 # draw_params = dict(matchColor = (0,255,0),

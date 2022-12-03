@@ -41,7 +41,7 @@ class preprocessing:
             result.append(np.copy(norm3))
         return result
 
-    def apply_threshold(self, test_load, threshold = 3, verbose = False):
+    def apply_threshold(self, test_load, threshold = 0.0001, verbose = False):
         '''
         input: array of diff img dim(25,112,112)
         return: array of diff img thresholded dim(25,112,112)
