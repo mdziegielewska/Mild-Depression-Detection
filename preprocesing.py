@@ -13,7 +13,7 @@ class preprocessing:
         pass
     
 
-    def get_diff_img(self, test_load, verbose = 1):
+    def get_diff_img(self, test_load, verbose = False):
         '''
         input: test load, single nii image dim(112,112,25,100)
         return: array of diff img dim(25,112,112)
@@ -39,7 +39,7 @@ class preprocessing:
             result.append(np.copy(norm3))
         return result
 
-    def apply_threshold(self, test_load, threshold = 0.01, verbose = 1):
+    def apply_threshold(self, test_load, threshold = 3, verbose = False):
         '''
         input: array of diff img dim(25,112,112)
         return: array of diff img thresholded dim(25,112,112)
@@ -49,19 +49,28 @@ class preprocessing:
         result = []
         for i, slice in enumerate(test_load):
             slice[slice<threshold] = 0
-            result.append(slice)
+            #result.append(np.copy(slice))
             if verbose:
                 plt.subplot(5,5,i+1),plt.imshow(slice)
                 plt.title('threshold'), plt.xticks([]), plt.yticks([])
-        return result
+        return test_load
 
+    def convert_type(self, test_load, verbose = False):
+        if verbose:
+            plt.figure()
+        img_list = [(img * 255).astype(np.uint8) for img in test_load]
+        if verbose:
+            for i, slice in enumerate(img_list):            
+                plt.subplot(5,5,i+1),plt.imshow(slice)
+                plt.title('UINT8'), plt.xticks([]), plt.yticks([])
+        return img_list
 
-    def run(self, test_load):
-        step1 = self.get_diff_img(test_load)
-        step2 = self.apply_threshold(step1)
-
+    def run(self, test_load, verbose = False):
+        step1 = self.get_diff_img(test_load, verbose)
+        step2 = self.apply_threshold(step1, threshold=0.001, verbose=verbose)
+        step3 = self.convert_type(step2, verbose=verbose)
         plt.show()
-        return step2
+        return step3
         
 
 preprocess = preprocessing()
