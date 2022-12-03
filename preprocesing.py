@@ -6,6 +6,8 @@ import os
 from skimage.metrics import structural_similarity as compare_ssim
 import argparse
 import cv2
+import warnings
+warnings.filterwarnings("ignore")
 
 class preprocessing:
 
