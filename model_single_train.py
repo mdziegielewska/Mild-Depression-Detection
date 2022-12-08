@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import balanced_accuracy_score, f1_score, precision_score, recall_score
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 
@@ -78,3 +78,30 @@ class ModelSingleTrain:
         print()
         print(f"{set_name} f1 score {f1}")
         print()
+    
+    def train_and_get_metrics(self):
+        self.model.fit(self.train_data, self.train_true_results)
+        data = self.test_data
+        classes = self.test_true_results
+        predictions = self.model.predict(data)
+        cm = confusion_matrix(classes, predictions, labels=[0, 1])
+        balanced_accuracy = balanced_accuracy_score(classes,
+                                                    predictions)
+
+        precision = precision_score(classes,
+                                    predictions,
+                                    average="weighted")
+
+        recall = recall_score(classes,
+                              predictions,
+                              average="weighted")
+
+        f1 = f1_score(classes,
+                      predictions,
+                      average="weighted")
+
+        return (balanced_accuracy, precision, recall, f1, cm)
+    
+    def show_cm(self, cm):
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
+        disp.plot()
