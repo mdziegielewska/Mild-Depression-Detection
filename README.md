@@ -7,6 +7,7 @@ This project focuses on developing a computer vision model capable of detecting 
 
 ### Project Structure
 
+```
 mild_depression_detection
 ├── models
 │   ├── mobilenet v2
@@ -26,3 +27,4 @@ mild_depression_detection
 │   ├── preprocessing.py
 │   └── scheduler.py
 └── .gitignore
+```
